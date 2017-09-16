@@ -1,2 +1,53 @@
-public class Branches()
+@Date 2017-9-16 11.19
+@place school
+//这个程序我花了不少时间，虽然看起来很简单（或许对我来说）
+1.没有意识到数组的作用，以前只是学了，这道题我想通过一次性将32个元素表述出来，通过size%16==0 system.out.println,划分每排，
+但是这样就对划分Mid有很大难度，
+2.没有用脑思考，准确说是懒，不想去试试，只是想当然的写程序，对程序的准确性不想去判断。
+3.看了答案以后任然有点疑惑，不知道主函数的for(int i=0;i<tree.length,i++）有什么用，但是没有这句话就会出现null；
+4.这个算是博客吧，第一次写，再接再厉吧！
+package six;
+import java.math.*;
+import java.util.*;
+public class Branches 
 {
+	static int high;
+	static String [] tree;
+	static int items;
+    int row = 1;
+    public static void main(String[] args)
+    {
+    	int rowSize = 32;
+		int numRows = (int)(Math.log(rowSize)/Math.log(2)) + 1;
+		tree = new String[numRows];
+		for(int i = 0; i < tree.length; i++) tree[i] = "";
+		makeBranches(0, rowSize-1, 0);
+		display();
+    	
+    }
+    public static void makeBranches(int left,int right,int row)
+    {
+    	 int mid = (left+right)/2;
+    	if(left==right)
+    	return;
+    	else
+    	{	  
+    	   for(int i=left;i<right;i++)
+    	   {
+    		   if(i==mid)
+    		   tree[row] += " X";
+    		   else
+    		   tree[row] += "-";
+    	   }
+    	}
+    	makeBranches(left,mid,row+1);
+    	makeBranches(mid+1,right,row+1);
+    }
+    public static void display()
+    {
+    	for(int i=0;i<tree.length;i++)
+    		System.out.println(tree[i]);
+    }
+	
+
+}
